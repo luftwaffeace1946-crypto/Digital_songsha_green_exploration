@@ -5,18 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>绿色勘查实训室建设图谱</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="assets/css/tree-basic.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <div id="chart"></div>
+    <div class="full-shell">
+      <header class="full-topbar">
+        <div class="title-block">
+          <h1>绿色勘查实训室建设图谱</h1>
+          <p>政策要求 → 岗位任务 → 实训项目 → 仪器设备 → 虚拟仿真 → 社会培训 → 公众科普</p>
+        </div>
 
-    <div class="page-actions" aria-label="页面操作">
-      <button id="exportBtn" type="button">导出图片</button>
-      <a href="index-full.html">完整功能版</a>
+        <div class="top-actions" aria-label="常用操作">
+          <button id="expandAllBtn" type="button">展开全部</button>
+          <button id="resetBtn" type="button">重置视图</button>
+
+          <div class="search-wrap">
+            <input id="searchInput" type="search" placeholder="搜索节点、成果或关键词" autocomplete="off" />
+            <span id="searchCount" class="search-count">0</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="full-main">
+        <section class="chart-pane" aria-label="左到右树形图">
+          <div id="chartScroll" class="chart-scroll">
+            <div id="chart" class="chart-stage"></div>
+          </div>
+        </section>
+
+        <div class="side-column">
+          <aside id="infoPanel" class="info-panel fixed-info-panel" aria-live="polite"></aside>
+          <div id="searchResults" class="search-results" aria-live="polite"></div>
+        </div>
+      </main>
+
+      <footer class="bottom-filter-panel">
+        <div class="filter-title">
+          <strong>开发属性</strong>
+          <span>点击筛选节点类型，颜色与图中节点保持一致</span>
+        </div>
+
+        <div id="filterGroup" class="dev-filter-group" aria-label="开发属性复选筛选">
+          <button class="is-active" type="button" data-filter="all" aria-pressed="true">
+            <span class="legend-dot all"></span>全部
+          </button>
+          <button type="button" data-filter="newDev" aria-pressed="false">
+            <span class="legend-dot newDev"></span>实训操作台
+          </button>
+          <button type="button" data-filter="retrofit" aria-pressed="false">
+            <span class="legend-dot retrofit"></span>微型钻探终端
+          </button>
+          <button type="button" data-filter="greenSystem" aria-pressed="false">
+            <span class="legend-dot greenSystem"></span>绿色勘查系统
+          </button>
+          <button type="button" data-filter="physical" aria-pressed="false">
+            <span class="legend-dot physical"></span>线下实物
+          </button>
+          <button type="button" data-filter="content" aria-pressed="false">
+            <span class="legend-dot content"></span>内容资源
+          </button>
+          <button type="button" data-filter="platform" aria-pressed="false">
+            <span class="legend-dot platform"></span>平台集成
+          </button>
+        </div>
+
+      </footer>
     </div>
 
     <script src="vendor/echarts.min.js"></script>
     <script src="data/treeData.js"></script>
-    <script src="assets/js/tree-basic-page.js"></script>
+    <script src="assets/js/tree-utils.js"></script>
+    <script src="assets/js/panel.js"></script>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>

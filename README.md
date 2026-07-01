@@ -1,22 +1,22 @@
 # 绿色勘查实训室建设图谱
 
-## 两个入口
+## 入口页面
 
 本图谱采用 ECharts From Left to Right Tree 左到右树形图，视觉参考 ECharts tree-basic 示例。根节点位于最左侧，七个建设环节位于第二列，各模块和任务向右逐级展开。
 
 1. `index.html`
 
-   极简树图展示版，视觉和交互参考 Apache ECharts tree-basic 示例。默认只显示根节点和七个环节，悬停使用 ECharts 原生 tooltip 和 emphasis，点击节点展开或折叠。该页面无右侧说明框、无搜索筛选、无自定义 hover 重绘，适合甲方快速查看整体结构。
+   GitHub Pages 默认入口，直接加载完整版图谱程序，包含搜索、开发属性复选筛选、节点说明、关联节点和完整内容查看。
 
 2. `index-full.html`
 
-   完整功能版，保留搜索、筛选、说明面板、关联节点和完整内容查看。
+   兼容入口，内容与默认入口保持一致，保留给已经使用旧链接的访问场景。
 
-   完整功能版采用“三段式固定布局”：顶部操作区；中部左侧树图 + 右侧节点说明；底部开发属性筛选按钮。右侧说明框和底部筛选框都通过 CSS Grid 占位，不覆盖主树图。
+完整版采用“三段式固定布局”：顶部操作区；中部左侧树图 + 右侧节点说明；底部开发属性筛选按钮。右侧说明框和底部筛选框都通过 CSS Grid 占位，不覆盖主树图。
 
-   开发属性筛选按钮内置颜色点，并支持复选筛选，包括：全部、实训操作台、微型钻探终端、绿色勘查系统、线下实物、内容资源、平台集成。其中“绿色勘查系统”为组合筛选，覆盖实训操作台、微型钻探终端、内容资源和平台集成。
+开发属性筛选按钮内置颜色点，并支持复选筛选，包括：全部、实训操作台、微型钻探终端、绿色勘查系统、线下实物、内容资源、平台集成。其中“绿色勘查系统”为组合筛选，覆盖实训操作台、微型钻探终端、内容资源和平台集成。
 
-中文入口 `绿色勘查实训室建设图谱.html` 与 `index.html` 使用同一套极简展示逻辑，便于本地直接打开演示。
+中文入口 `绿色勘查实训室建设图谱.html` 与 `index.html` 使用同一套完整版程序，便于本地直接打开演示。
 
 ## Word 方案使用规则
 
@@ -51,7 +51,7 @@ python3 -m http.server 8080
 1. 将“树形图”文件夹作为 GitHub 仓库根目录。
 2. 推送到 GitHub。
 3. 打开仓库 `Settings → Pages`。
-4. Source 选择 `main` 分支和 `/root`。
+4. Source 选择当前发布分支和 `/root`。
 5. 保存后使用 GitHub Pages 生成的访问链接。
 
 ## 数据维护方式
@@ -85,14 +85,6 @@ python3 -m http.server 8080
 ```html
 <script src="vendor/echarts.min.js"></script>
 <script src="data/treeData.js"></script>
-<script src="assets/js/tree-basic-page.js"></script>
-```
-
-完整功能版加载：
-
-```html
-<script src="vendor/echarts.min.js"></script>
-<script src="data/treeData.js"></script>
 <script src="assets/js/tree-utils.js"></script>
 <script src="assets/js/panel.js"></script>
 <script src="assets/js/app.js"></script>
@@ -108,13 +100,10 @@ python3 -m http.server 8080
 ├── README.md
 ├── assets/
 │   ├── css/
-│   │   ├── style.css
-│   │   └── tree-basic.css
+│   │   └── style.css
 │   └── js/
 │       ├── app.js
-│       ├── app-full.js
 │       ├── panel.js
-│       ├── tree-basic-page.js
 │       └── tree-utils.js
 ├── data/
 │   └── treeData.js
