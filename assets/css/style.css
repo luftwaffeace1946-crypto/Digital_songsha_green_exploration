@@ -23,7 +23,7 @@
   --reuse: #8fa3b8;
 
   --right-panel-width: 380px;
-  --bottom-panel-height: 88px;
+  --bottom-panel-height: 62px;
   --topbar-height: 72px;
   --gap: 14px;
   --radius: 14px;
@@ -266,10 +266,10 @@ a {
 .bottom-filter-panel {
   display: grid;
   grid-template-columns: auto 300px minmax(0, 1fr);
-  gap: 18px;
+  gap: 10px;
   align-items: center;
   min-height: 0;
-  padding: 10px 18px;
+  padding: 6px 16px;
   border-top: 1px solid rgba(53, 186, 255, 0.28);
   background: linear-gradient(135deg, rgba(5, 8, 15, 0.95), rgba(7, 24, 42, 0.96) 58%, rgba(39, 22, 7, 0.94));
   box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.28);
@@ -298,25 +298,28 @@ a {
 
 .dev-filter-group {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 6px;
   align-items: center;
   justify-content: flex-start;
   min-width: 0;
-  padding-left: 24px;
+  padding-left: 16px;
 }
 
 .dev-filter-group button {
   display: inline-flex;
-  gap: 7px;
+  gap: 6px;
   align-items: center;
-  height: 34px;
-  padding: 0 12px;
+  height: 32px;
+  padding: 0 10px;
   border: 1px solid rgba(143, 163, 184, 0.34);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.05);
   color: #d9e8f8;
   cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
@@ -333,8 +336,8 @@ a {
 }
 
 .legend-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   flex: 0 0 auto;
   border-radius: 50%;
   background: #9ca3af;
@@ -354,6 +357,10 @@ a {
 
 .legend-dot.retrofit {
   background: var(--retrofit);
+}
+
+.legend-dot.greenSystem {
+  background: linear-gradient(135deg, var(--new-dev), var(--retrofit), var(--content), var(--platform));
 }
 
 .legend-dot.physical {

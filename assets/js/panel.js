@@ -17,7 +17,7 @@
   }
 
   function renderSourceList(sources) {
-    const visibleSources = sources || [];
+    const visibleSources = (sources || []).filter((source) => !source.internal);
     if (visibleSources.length === 0) return "<p>暂无外部来源链接。</p>";
     return `<ul class="source-list">${visibleSources
       .map((source) => {

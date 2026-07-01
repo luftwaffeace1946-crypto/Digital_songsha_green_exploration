@@ -1,0 +1,15 @@
+# Local Word/Office proposal files are source material only.
+# Do not publish them to GitHub or GitHub Pages.
+*.doc
+*.docx
+*.docm
+*.dot
+*.dotx
+*.wps
+~$*
+docs/*.doc
+docs/*.docx
+docs/*.docm
+docs/*.dot
+docs/*.dotx
+docs/*.wps

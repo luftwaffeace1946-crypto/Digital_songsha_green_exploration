@@ -1,12 +1,16 @@
 (function () {
   const DEV_TYPES = {
     project: { label: "项目总节点", shortLabel: "项目", color: "#2ee6b7" },
-    newDev: { label: "新开发内容", shortLabel: "新开发", color: "#35baff" },
-    retrofit: { label: "基于已有钻探系统二次开发", shortLabel: "钻探二开", color: "#ff9d2e" },
+    newDev: { label: "绿色勘查综合实训操作台", shortLabel: "实训操作台", color: "#35baff" },
+    retrofit: { label: "微型钻探终端交互", shortLabel: "微型钻探终端", color: "#ff9d2e" },
     physical: { label: "线下实物或工具包", shortLabel: "线下实物", color: "#2ee6b7" },
     content: { label: "内容资源", shortLabel: "内容资源", color: "#b78cff" },
     platform: { label: "平台集成", shortLabel: "平台集成", color: "#24d6ff" },
-    reuse: { label: "既有资源复用", shortLabel: "既有资源", color: "#8fa3b8" }
+    reuse: { label: "内容资源", shortLabel: "内容资源", color: "#b78cff" }
+  };
+
+  const FILTER_GROUPS = {
+    greenSystem: ["newDev", "retrofit", "content", "platform"]
   };
 
   function walk(node, visitor, parent = null, depth = 0, path = []) {
@@ -112,15 +116,21 @@
     const collapsedIds = state.collapsedIds || new Set();
     const relatedIds = state.activeId ? new Set(index.nodes.get(state.activeId)?.relatedIds || []) : new Set();
     const pathIds = state.activeId ? new Set(index.paths.get(state.activeId) || []) : new Set();
+    const selectedFilters =
+      state.filters && typeof state.filters.has === "function" ? state.filters : new Set(state.filter && state.filter !== "all" ? [state.filter] : ["all"]);
+    const filterTypes = new Set();
+    selectedFilters.forEach((filter) => {
+      (FILTER_GROUPS[filter] || [filter]).forEach((devType) => filterTypes.add(devType));
+    });
     const hasSearchFocus = searchIds.size > 0;
-    const hasFilterFocus = state.filter !== "all";
+    const hasFilterFocus = !selectedFilters.has("all") && selectedFilters.size > 0;
     const hasPersistentFocus = hasSearchFocus || hasFilterFocus;
 
     function cloneNode(node, depth) {
       const children = node.children || [];
       const hasChildren = children.length > 0;
       const dev = DEV_TYPES[node.devType] || DEV_TYPES.content;
-      const matchesFilter = state.filter === "all" || node.devType === state.filter;
+      const matchesFilter = !hasFilterFocus || filterTypes.has(node.devType);
       const matchesSearch = searchIds.has(node.id);
       const isActive = activeIds.has(node.id);
       const isPath = pathIds.has(node.id);
@@ -138,7 +148,7 @@
       if (expandedIds.has(node.id)) collapsed = false;
 
       let opacity = 1;
-      if (state.filter !== "all" && !matchesFilter) opacity = 0.46;
+      if (hasFilterFocus && !matchesFilter) opacity = 0.46;
       if (hasSearchFocus && !(matchesSearch || isPath || isRelated)) opacity = Math.min(opacity, 0.48);
 
       const borderColor = matchesSearch ? "#ff9d2e" : isPath ? "#2ee6b7" : isRelated ? "#35baff" : dev.color;
@@ -197,6 +207,7 @@
 
   window.GreenTreeUtils = {
     DEV_TYPES,
+    FILTER_GROUPS,
     walk,
     createIndex,
     getAncestorIds,
